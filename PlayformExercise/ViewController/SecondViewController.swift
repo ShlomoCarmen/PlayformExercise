@@ -34,7 +34,7 @@ class SecondViewController: UIViewController {
     
     func getData() {
         self.dataActivity.startAnimating()
-        ItemRepository.shared.getAPIData(id: "\(self.openingTimes)", completion: { result in
+        ItemRepository.shared.getItem(id: "\(self.openingTimes)", completion: { result in
             switch result {
             case.failure(_):
                 self.response = UserDefaultsProvider.shared.currentData
@@ -50,14 +50,18 @@ class SecondViewController: UIViewController {
     }
     
     func setText() {
-        
         guard let response = self.response else { return }
         self.userIdLabel.text = "Userid: \(response.userId)"
         self.titleLabel.text = "Title: \(response.title)"
     }
     
     func setImage() {
-        guard let response = self.response else { return }
+        guard let response = self.response else {
+            self.dataActivity.stopAnimating()
+            self.dataActivity.isHidden = true
+            self.userIdLabel.text = "no data recived"
+            return
+        }
         let image = ImageRepository.shared.getImage(complited: response.completed)
         self.dataActivity.stopAnimating()
         self.dataActivity.isHidden = true

@@ -15,9 +15,8 @@ class ItemRepository {
         
     }
     
-    func getAPIData(id: String, completion:@escaping (_ result: Result<Item ,Error>)->Void){
-        
-        API.requestData(id: id) { (result) in
+    func getItem(id: String, completion:@escaping (_ result: Result<Item ,Error>)->Void){
+        API.getItemFromServer(id: id) { (result) in
             switch result {
             case .failure(let error):
                 completion(.failure (error))

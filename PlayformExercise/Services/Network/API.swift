@@ -9,7 +9,7 @@ import Foundation
 
 class API {
     
-    class func requestData(id: String, completionHandler:@escaping (_ response: APIResult<Item>)->Void) {
+    class func getItemFromServer(id: String, completionHandler:@escaping (_ response: APIResult<Item>)->Void) {
         let stringUrl = "https://jsonplaceholder.typicode.com/todos/\(id)"
         let dataURL = URL(string: stringUrl)!
         let request = URLRequest(url: dataURL, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 60)

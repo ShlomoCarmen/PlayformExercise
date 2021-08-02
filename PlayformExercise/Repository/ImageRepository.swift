@@ -44,7 +44,7 @@ class ImageRepository {
     }
     
     func getSavedImage() -> UIImage? {
-        let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!;
+        let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         let fileURL = documentsUrl.appendingPathComponent("savedImage.png")
         do {
             let imageData = try Data(contentsOf: fileURL)
